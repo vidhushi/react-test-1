@@ -3,6 +3,7 @@ import { ChatManager, TokenProvider } from '@pusher/chatkit'
 import MessageList from '../MessageList/MessageList'
 import SendMessageForm from '../MessageForm/SendMessageForm'
 import OnlineList from '../OnlineList/OnlineList'
+import { Grid, Image } from 'semantic-ui-react'
 
 class Chat extends Component {
     state = {
@@ -25,7 +26,6 @@ class Chat extends Component {
           .connect()
           .then(currentUser => {
             this.setState({ currentUser })
-            console.log('Bleep bloop 🤖 You are connected to Chatkit')
             return currentUser.subscribeToRoom({
                       roomId: 25941255, // Replace with YOUR ROOM ID
                       messageLimit: 100,
@@ -57,18 +57,20 @@ class Chat extends Component {
     render() {
         
         return (
-            <div className="wrapper">
-                <div>
-                  <OnlineList
-                    currentUser={this.state.currentUser}
-                    users={this.state.currentRoom.users}
-                  />
-                </div>
-                <div className="chat">
-                  <MessageList messages={this.state.messages} />
-                  <SendMessageForm onSend={this.onSend} />
-                </div>
-              </div>
+          <Grid divided>
+              <Grid.Row style={{marginLeft:'1%'}}>
+                  <Grid.Column width={3} textAlign='center'>
+                      <OnlineList
+                        currentUser={this.state.currentUser}
+                        users={this.state.currentRoom.users}
+                      />
+                  </Grid.Column>
+                  <Grid.Column width={12}>
+                      <MessageList messages={this.state.messages} />
+                      <SendMessageForm onSend={this.onSend} />
+                  </Grid.Column>
+                </Grid.Row>
+          </Grid>
         );
     }
 }

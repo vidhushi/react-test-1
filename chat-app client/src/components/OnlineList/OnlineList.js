@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { List, Label } from 'semantic-ui-react'
+import { List, Label, Image } from 'semantic-ui-react'
 
 class OnlineList extends Component {
   render() {
     return (
-      <List className="online-list">
+      <List divided verticalAlign='middle'>
           {this.props.users &&
             this.props.users.map((user, index) => {
               if (user.id === this.props.currentUser.id) {
@@ -21,18 +21,24 @@ class OnlineList extends Component {
   }
 
   renderItem(name, id, status) {
-    const itemStyle = {}
     return (
       <List.Item key={id}>
-        <div
-          className="online-list-item"
-          style={{
-            background: status === 'online' ? '#6BD761' : 'gray'
-          }}
-        />
-        <Label color={"grey"}>
-          {name}{' '}
-        </Label>{' '}
+        <List.Content floated='left'>
+          <Image avatar src='https://react.semantic-ui.com/images/avatar/small/christian.jpg' />
+          <List.Header> 
+            {name}{' '}
+          </List.Header>{' '}
+        </List.Content>
+        <List.Content verticalAlign='middle' floated='right' style={{
+          paddingTop: '12%'
+        }}>
+          <div
+            className="online-list-item"
+            style={{
+              background: status === 'online' ? '#6BD761' : 'gray',
+            }}
+          />
+      </List.Content>
       </List.Item>
     )
   }

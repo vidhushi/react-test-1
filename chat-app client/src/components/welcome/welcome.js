@@ -10,8 +10,7 @@ class Welcome extends Component {
     }
   }
 
-  handleSubmit = e => {
-    e.preventDefault()
+  handleOnJoin = e => {
     this.props.handleSubmit(this.state.username)
   }
 
@@ -21,25 +20,33 @@ class Welcome extends Component {
 
 
     render() {
+      
+      const CardCss={
+          marginTop: '6%',
+          width: 'calc(1127px + 2rem)!important',
+          background: '#c9c7dc66',
+          padding: '2%',
+          borderRadius: '10px',
+          boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
+      }
+
         return (
             <div>   
-              <Grid container >
+              <Grid container style={CardCss}>
                   <Grid.Row columns={1}>
                     <Grid.Column >   
-                      <Header as='h3'>Enter your Name</Header> 
+                      <Header as='h2' >Enter your Name</Header> 
                     </Grid.Column>
                   </Grid.Row>
                   <Grid.Row columns={2}>
-                  <form onSubmit={this.handleSubmit}>
                     <Grid.Column width={3}>
                       <Input placeholder='Enter your Name' 
                       value={this.state.username}
                       onChange={this.handleChange} />
                     </Grid.Column>
                     <Grid.Column width={2}>
-                      <Button primary type="submit">Join</Button>
+                      <Button onClick={this.handleOnJoin} primary type="submit">Join</Button>
                     </Grid.Column>
-                    </form>
                   </Grid.Row>
               </Grid>
             </div>
